@@ -1,0 +1,45 @@
+/**
+ * File Name: main.css
+ * Purpose: This file contains the styling for the plan vacation.html page which is the main page.
+ * Author: Ng Shien Ming
+ * Team: 154
+ * Last Modified: 15/10/2021
+ */
+
+ /* Logo */
+#getawaybloomlogo
+{
+  height: 64px;
+}
+
+/* Background color of body */
+body
+{
+  background-color: #C9F5D3;
+}
+
+/* Specify the size of the map */
+#map
+{
+  height: 425px; 
+  width: 100%;
+}
+
+/* Modify the width of the mdl-textfield */
+.mdl-textfield
+{
+  width: 270px;
+}
+
+/* Padding for confirm button */
+.confirmButton
+{
+  padding-top: 16px;
+}
+
+/* Enable scrolling and specify height of the poi display */
+.poiContainer
+{
+  overflow: scroll;
+  height: 280px;
+}

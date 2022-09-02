@@ -1,0 +1,80 @@
+<!--
+File Name: index.html
+Team: 154
+Authors: Ng Shien Ming, Nareesh Kumar Balakrishnan
+Last Modified: 11/10/2021
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to GetawayBloom</title>
+        <!-- MDL -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-green.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="css/splashPage.css">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+        <!-- Library -->
+        <script src="js/service.js"></script>
+        <script src="https://eng1003.monash/libs/services.js"></script>
+    </head>
+    <body>
+        <!-- Start copied code from layout -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title"></span>
+                     <!-- Logo -->
+                    <img id="getawaybloomlogo" src="img/GetawayBloomLogoBlack.png">
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <img src="img/GetawayBloomLogoBlack.png" id="getawaybloomlogo"> 
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="planVacation.html">Home</a>
+                    <a class="mdl-navigation__link" href="vacationList.html">All Planned Vacation</a>
+                </nav>
+            </div>
+            <main>
+                <!-- Row 1: Empty -->
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col heightSpacing"></div>
+                </div>
+                <!-- Row 2: Separated into 3 equal columns -->
+                <div class="mdl-grid">
+                    <!-- Column 1: Empty column -->
+                    <div class="mdl-cell mdl-cell--4-col"></div>
+                    <!-- Column 2: Title, app information and button to other page -->
+                    <div class="mdl-cell mdl-cell--4-col alignCenter">
+                        <h1><b>GetawayBloom</b></h1>
+                        <p>"Plan a trip with a holiday destination of your desired choice now at 
+                            GetawayBloom, a travel agent company that operates globally. Giving you 
+                            the luxury of renting a vehicle along with being able to add recommended
+                            Points of Interest from our generated list of options based on your selected POI category!
+                            Finally, you not only have the freedom to view details of your planned trips
+                            but also the ability to view your entire trip along with the selected Point of 
+                            Interests on a Map!"</p>
+                        <a href="planVacation.html">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Home</button>
+                        </a>
+                        <br><br>
+                        <a href="vacationList.html">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">All Planned Vacation</button>
+                        </a>
+                        </div>
+                        <!-- Empty column -->
+                    <div class="mdl-cell mdl-cell--4-col"></div>
+                </div>
+                <!-- Row 3: Empty row -->
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col heightSpacing "></div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+<!--
+File Name: vacationList.html
+Team: 154
+Authors: Ng Shien Ming, Mohammed Osman Kaizer Hassan
+Last Modified: 11/10/2021
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>All Planned Vacation</title>
+        <!-- Material Design Lite -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-green.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <!-- CSS Stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/vacationList.css">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+        <!-- Library -->
+        <script src="js/service.js"></script>
+        <script src="https://eng1003.monash/libs/services.js"></script>
+    </head>
+    <body>
+        <!-- start copied code from layout -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title"></span>
+                    <img src="img/GetawayBloomLogoBlack.png" id="getawaybloomlogo"> <!--Logo-->
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation. We hide it in small screens. -->
+                    <nav class="mdl-navigation mdl-layout--large-screen-only">
+                        <a class="mdl-navigation__link" href="index.html">Splash Page</a>
+                    </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <img src="img/GetawayBloomLogoBlack.png" id="getawaybloomlogo"> 
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="planVacation.html">Home</a>
+                    <a class="mdl-navigation__link" href="vacationList.html">All Planned Vacation</a>
+                </nav>
+            </div>
+            <main>
+                <!-- Page title -->
+                <div class="title">
+                    <div>
+                        <h3>All Planned Vacation</h3>
+                    </div>
+                </div>
+                <!-- Container for Vacation List Table -->
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <!-- Start Vacation List Table -->
+                        <table class="mdl-data-table mdl-js-data-table">
+                            <tbody id="vacationList">
+                                <!-- Table row to be generated and sorted in JS -->
+                                <!-- Template below -->
+                                <!-- Row 1: Vacation 1 -->
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <span>Vacation Name: ${Vacation name}</span>
+                                        <br>
+                                        <span>Starting Date: ${Date}</span>
+                                        <br>
+                                        <span>Starting Location: ${Starting Location}</span>
+                                    </td>
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <span>Total Distance: ${Total Distance}</span>
+                                        <br>
+                                        <span>Vehicle Type: ${Vehicle Type}</span>
+                                        <br>
+                                        <span>Number of stops: ${X}</span>
+                                    </td>
+                                    <td>
+                                        <!-- Button to remove vacation or view details -->
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-400 button" onclick="removeVacation(i)">Remove</button>
+                                        <br>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" onclick="viewVacationDetails(i)">Details</button>
+                                    </td>
+                                </tr>
+                                <!-- End of Template -->
+                            </tbody>
+                        </table>
+                        <!-- End Vacation List Table -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script src="js/config.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/vacationList.js"></script>
+</html>

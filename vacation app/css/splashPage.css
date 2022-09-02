@@ -1,0 +1,31 @@
+/**
+ * File Name: splashPage.css
+ * Purpose: This file contains the styling for the index.html page which is the splash page.
+ * Author: Ng Shien Ming
+ * Team: 154
+ * Last Modified: 15/10/2021
+ */
+
+/* Background color of body */
+body
+{
+  background-color: #C9F5D3;
+}
+
+/* Class to align center */
+.alignCenter
+{
+  text-align: center;
+}
+
+/* Class to space a height */
+.heightSpacing
+{
+  height: 200px;
+}
+
+/* Logo */
+#getawaybloomlogo
+{
+  height: 64px;
+}

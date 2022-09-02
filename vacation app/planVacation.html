@@ -1,0 +1,261 @@
+<!--
+File Name: planVacation.html
+Team: 154
+Author: Ng Shien Ming
+Last Modified: 11/10/2021
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Home</title>
+        <!-- Material Design Lite -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-green.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <!-- Mapbox -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+        <!-- CSS Stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+        <!-- Library -->
+        <script src="js/service.js"></script>
+        <script src="https://eng1003.monash/libs/services.js"></script>
+    </head>
+
+    <body>
+        <!-- Start copied code from layout -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title"></span>
+                    <!-- Logo -->
+                    <img src="img/GetawayBloomLogoBlack.png" id="getawaybloomlogo"> 
+                    <!-- Add spacer to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation. We hide it in small screens. -->
+                    <nav class="mdl-navigation mdl-layout--large-screen-only">
+                        <a class="mdl-navigation__link" href="index.html">Splash Page</a>
+                    </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <img src="img/GetawayBloomLogoBlack.png" id="getawaybloomlogo"> 
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="planVacation.html">Home</a>
+                    <a class="mdl-navigation__link" href="vacationList.html">All Planned Vacation</a>
+                </nav>
+            </div>
+            <main>
+                <!-- Map: Max height = 960px-->
+                <div id="map"></div>
+                <!-- Input field for planning -->
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--8-col">
+                        <div class="mdl-grid">
+                            <!-- Row 1: Starting Location -->
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>Starting Location</h4>
+                            </div>
+                            <div class="mdl-cell mdl-cell--7-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
+                                    <input class="mdl-textfield__input" type="search" id="startingLocation" required>
+                                    <label class="mdl-textfield__label">Name/Address</label>
+                                    <span class="mdl-textfield__error" id="nameaddressMsg"></span>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="searchStartingLocation()">
+                                    <i class="material-icons">search</i>
+                                </button>
+                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="getUserCurrentLocationUsingGeolocation(processCurrentLocation)">
+                                    <i class="material-icons">location_on</i>
+                                </button>
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col">
+                                <div class="confirmButton">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="confirmStartingLocation()">Confirm</button>
+                                </div>
+                            </div>
+                            <!-- Row 2: Vehicle Type -->
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>Vehicle Type</h4>
+                            </div>
+                            <div class="mdl-cell mdl-cell--7-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" type="text" id="vehicleType" required>
+                                        <option></option>
+                                        <option value="Sedan">Sedan: 1000km</option>
+                                        <option value="SUV">SUV: 850km</option>
+                                        <option value="Van">Van: 600km</option>
+                                        <option value="Minibus">Minibus: 450km</option>
+                                    </select>
+                                    <label class="mdl-textfield__label">Select vehicle type</label>
+                                    <span class="mdl-textfield__error" id="vehicleTypeMsg"></span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col">
+                                <div class="confirmButton">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="confirmVehicleType()">Confirm</button>
+                                </div>
+                            </div>
+                            <!-- Row 3 - 4: Point of Interest -->
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>Point of interest</h4>
+                            </div>
+                            <!-- Select POI category -->
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" type="text" id="poiCategory" onchange="generateTenNearestPOI()" required>
+                                        <option></option>
+                                        <option value="attraction">Tourist Attractions</option>
+                                        <option value="lodging">Accomodations</option>
+                                        <option value="gas station">Gas stations</option>
+                                        <option value="food">Restaurants</option>
+                                    </select>
+                                    <label class="mdl-textfield__label">Select category</label>
+                                    <span class="mdl-textfield__error" id="poiCategoryMsg"></span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--5-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="search" id="poiSearch">
+                                    <label class="mdl-textfield__label">Search Area of Interest</label>
+                                    <span class="mdl-textfield__error" id="areaMsg"></span>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="searchAreaOfInterest()">
+                                    <i class="material-icons">search</i>
+                                </button>
+                            </div>
+                            <!-- Add POI -->
+                            <div class="mdl-cell mdl-cell--3-col"></div>
+                            <div class="mdl-cell mdl-cell--7-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" type="text" id="poiOption" onchange="viewSelectedPOI()" required>
+                                        <option></option>
+                                    </select>
+                                    <label class="mdl-textfield__label">Select POI</label>
+                                    <span class="mdl-textfield__error" id="poiOptionMsg"></span>
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="addPOI()">
+                                    <i class="material-icons">add</i> <!-- Button to Add POI to Route -->
+                                </button>
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col"></div>
+                            <!-- Row 5: Show total distance -->
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>Total Distance</h4>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>
+                                    <span id="totalDistance">0.00 km</span> 
+                                </h4>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>Remaining Range</h4>
+                            </div>
+                            <div class="mdl-cell mdl-cell--3-col">
+                                <h4>
+                                    <span id="remainingRange">0.00 km</span> 
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- POI List on the right -->
+                    <!-- <div class="mdl-cell mdl-cell--1-col"></div> -->
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <h4>Point of Interest List</h4>
+                                <div class="poiContainer">
+                                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                                        <thead>
+                                            <tr>
+                                            <th class="mdl-data-table__cell--non-numeric">No.</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Point of Interest</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Distance (km)</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="poiListDisplay"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- Buttons to save or cancel vacation -->
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="changeOrder()">Change Order</button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" onclick="saveVacation()">Save</button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-400 button" onclick="cancelVacation()">Cancel</button>                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pop up dialog to change order -->
+                    <dialog class="mdl-dialog" id="orderDialog">
+                        <h4 class="mdl-dialog__title">Choose two points of interest to swap order</h4>
+                        <div class="mdl-dialog__content">
+                          <div class="mdl-grid">
+                            <!-- Begin inputs -->
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" type="text" id="order1">
+                                        <option></option>
+                                    </select>
+                                    <label class="mdl-textfield__label">Select first POI</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" type="text" id="order2">
+                                        <option></option>
+                                    </select>
+                                    <label class="mdl-textfield__label">Select second POI</label>
+                                </div>
+                            </div>
+                            <!-- End inputs -->
+                          </div>
+                        </div>
+                        <div class="mdl-dialog__actions">
+                          <!-- Begin dialog actions -->
+                          <button type="button" class="mdl-button" onclick="confirmChangeOrder()">Confirm</button>
+                          <button type="button" class="mdl-button" onclick="cancelChangeOrder()">Cancel</button>
+                          <!-- End dialog actions -->
+                        </div>
+                    </dialog>
+                    <!-- Pop up dialog to save vacation -->
+                    <dialog class="mdl-dialog" id="saveDialog">
+                        <h4 class="mdl-dialog__title">Enter details to save vacation</h4>
+                        <div class="mdl-dialog__content">
+                          <div class="mdl-grid">
+                            <!-- Begin inputs -->
+                            <div class="mdl-cell mdl-cell--12-col">
+                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder" required>
+                                <input class="mdl-textfield__input" type="text" id="vacationName">
+                                <label class="mdl-textfield__label" for="vacationName">Vacation Name</label>
+                                <span class="mdl-textfield__error" id="vacationNameMsg" ></span>
+                              </div><br>
+                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder" required>
+                                <input class="mdl-textfield__input" type="date" id="vacationDate">
+                                <label class="mdl-textfield__label" for="vacationDate">Starting Date</label>
+                                <span class="mdl-textfield__error" id="vacationDateMsg" ></span>
+                              </div>
+                            </div>
+                            <!-- End inputs -->
+                          </div>
+                        </div>
+                        <div class="mdl-dialog__actions">
+                          <!-- Begin dialog actions -->
+                          <button type="button" class="mdl-button" onclick="confirmSaveVacation()">Confirm</button>
+                          <button type="button" class="mdl-button" onclick="cancelSaveVacation()">Cancel</button>
+                          <!-- End dialog actions -->
+                        </div>
+                    </dialog>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script src="js/config.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/mapForPlanning.js"></script>
+    <script src="js/main.js"></script>
+</html>

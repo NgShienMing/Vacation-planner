@@ -1,0 +1,42 @@
+/**
+ * File Name: vacationList.css
+ * Purpose: This file contains the styling for the vacation list.html page.
+ * Author: Ng Shien Ming
+ * Team: 154
+ * Last Modified: 15/10/2021
+ */
+
+/* Background color of body */
+body
+{
+  background-color: #C9F5D3;
+}
+
+/* Styling of the title bar */
+.title
+{
+  background-color: #FCED97;
+  border-top: solid;
+  border-bottom: solid;
+  padding-left: 20px;
+}
+
+/* Logo */
+#getawaybloomlogo
+{
+  height: 64px;
+}
+
+/* Styling the remove and details button */
+.button
+{
+  width: 90px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Table full width */
+table
+{
+  width: 100%;
+}
